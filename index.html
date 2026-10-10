@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Secure Portal // Student Arcade Hub</title>
+    <title>Enterprise Secure Portal // Expanded Arcade Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -74,7 +74,7 @@
 
 
     <!-- ==================== UNBLOCKED GAMES DASHBOARD VIEW ==================== -->
-    <div id="arcadeView" class="hidden w-full max-w-6xl bg-arcade-bg rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8 text-white transition-all duration-500">
+    <div id="arcadeView" class="hidden w-full max-w-7xl bg-arcade-bg rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8 text-white transition-all duration-500">
         
         <!-- Header Navigation Bar -->
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-700 pb-4 mb-6 gap-4">
@@ -82,7 +82,7 @@
                 <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow">🎮</div>
                 <div>
                     <h2 class="text-xl font-bold tracking-tight text-white">Classroom Arcade Hub</h2>
-                    <p class="text-xs text-slate-400">Unblocked Games Collection • Ready to Play</p>
+                    <p class="text-xs text-slate-400">10 Local Game Folders Connected • Ready to Play</p>
                 </div>
             </div>
             
@@ -98,57 +98,113 @@
         <!-- Main Content Area -->
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
-            <!-- Left Side: Game Grid / Picker (1 column on large screens) -->
+            <!-- Left Side: Game Grid / Picker (Scrollable list of all 10 folders) -->
             <div class="lg:col-span-1 space-y-3">
-                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1">Featured Games</h3>
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1">Game Folders</h3>
                 
-                <div id="gameListContainer" class="space-y-2 max-h-[480px] overflow-y-auto pr-1">
-                    <!-- Game Card 1 -->
-                    <button onclick="loadGame('2048/index.html', '2048 Classic')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
-                        <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🔢</div>
+                <div id="gameListContainer" class="space-y-2 max-h-[500px] overflow-y-auto pr-2">
+                    
+                    <!-- 1. Chess -->
+                    <button onclick="loadGame('chess/index.html', 'Chess')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-slate-700 rounded-lg flex items-center justify-center text-base shrink-0">♟️</div>
                         <div class="overflow-hidden">
-                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">2048</h4>
-                            <p class="text-[11px] text-slate-400 truncate">Puzzle Game</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Chess</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Strategy</p>
                         </div>
                     </button>
 
-                    <!-- Game Card 2 -->
-                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=retro-bowl', 'Retro Bowl')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
-                        <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🏈</div>
+                    <!-- 2. 3D City -->
+                    <button onclick="loadGame('3d.city/index.html', '3D City')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-cyan-600 rounded-lg flex items-center justify-center text-base shrink-0">🏙️</div>
                         <div class="overflow-hidden">
-                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Retro Bowl</h4>
-                            <p class="text-[11px] text-slate-400 truncate">Sports Arcade</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">3D City</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Simulation</p>
                         </div>
                     </button>
 
-                    <!-- Game Card 3 -->
-                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=slope', 'Slope Game')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
-                        <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">📐</div>
+                    <!-- 3. Classic Pool Game -->
+                    <button onclick="loadGame('Classic-Pool-Game/index.html', 'Classic Pool Game')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-emerald-700 rounded-lg flex items-center justify-center text-base shrink-0">🎱</div>
                         <div class="overflow-hidden">
-                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Slope</h4>
-                            <p class="text-[11px] text-slate-400 truncate">Action / Runner</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Classic Pool</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Sports</p>
                         </div>
                     </button>
 
-                    <!-- Game Card 4 -->
-                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=moto-x3m', 'Moto X3M')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
-                        <div class="w-10 h-10 bg-rose-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🏍️</div>
+                    <!-- 4. Clumsy Bird -->
+                    <button onclick="loadGame('clusmy-bird/index.html', 'Clumsy Bird')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-yellow-600 rounded-lg flex items-center justify-center text-base shrink-0">🐦</div>
                         <div class="overflow-hidden">
-                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Moto X3M</h4>
-                            <p class="text-[11px] text-slate-400 truncate">Stunt Racing</p>
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Clumsy Bird</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Arcade</p>
                         </div>
                     </button>
+
+                    <!-- 5. Dead Valley -->
+                    <button onclick="loadGame('dead-valley/index.html', 'Dead Valley')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-red-800 rounded-lg flex items-center justify-center text-base shrink-0">🧟</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Dead Valley</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Survival</p>
+                        </div>
+                    </button>
+
+                    <!-- 6. Hextris -->
+                    <button onclick="loadGame('hextris/index.html', 'Hextris')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-purple-600 rounded-lg flex items-center justify-center text-base shrink-0">🛑</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Hextris</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Puzzle</p>
+                        </div>
+                    </button>
+
+                    <!-- 7. Asteroids -->
+                    <button onclick="loadGame('Asteroids/index.html', 'Asteroids')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-indigo-600 rounded-lg flex items-center justify-center text-base shrink-0">🚀</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Asteroids</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Retro Space</p>
+                        </div>
+                    </button>
+
+                    <!-- 8. Pacman -->
+                    <button onclick="loadGame('pacman/index.html', 'Pacman')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-amber-500 rounded-lg flex items-center justify-center text-base shrink-0">🟡</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Pacman</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Classic Arcade</p>
+                        </div>
+                    </button>
+
+                    <!-- 9. Paint Run 2 -->
+                    <button onclick="loadGame('paint-run2/index.html', 'Paint Run 2')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-pink-600 rounded-lg flex items-center justify-center text-base shrink-0">🎨</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Paint Run 2</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Platformer</p>
+                        </div>
+                    </button>
+
+                    <!-- 10. Particle Clicker -->
+                    <button onclick="loadGame('particle-clicker/index.html', 'Particle Clicker')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-9 h-9 bg-blue-500 rounded-lg flex items-center justify-center text-base shrink-0">⚛️</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Particle Clicker</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Idle / Science</p>
+                        </div>
+                    </button>
+
                 </div>
             </div>
 
             <!-- Right Side: Game Player Display Window (3 columns) -->
-            <div class="lg:col-span-3 bg-arcade-dark border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative min-h-[500px] shadow-inner">
+            <div class="lg:col-span-3 bg-arcade-dark border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative min-h-[520px] shadow-inner">
                 
                 <!-- Initial Empty State -->
                 <div id="gamePlaceholder" class="text-center p-8">
-                    <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-3 border border-slate-700">🚀</div>
-                    <h3 class="text-base font-bold text-white mb-1">Select a Game to Start Playing</h3>
-                    <p class="text-xs text-slate-400 max-w-sm">Choose any unblocked game from the sidebar list on the left to launch it instantly.</p>
+                    <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-3 border border-slate-700">🕹️</div>
+                    <h3 class="text-base font-bold text-white mb-1">Select a Game Folder to Start Playing</h3>
+                    <p class="text-xs text-slate-400 max-w-sm">Choose any game from the sidebar list on the left to launch its local folder directory instantly.</p>
                 </div>
 
                 <!-- Active Game Container -->
@@ -162,7 +218,7 @@
                     </div>
                     
                     <!-- Game Iframe Player -->
-                    <iframe id="gameIframe" class="w-full h-[460px] bg-black rounded-xl border border-slate-700 shadow-lg" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+                    <iframe id="gameIframe" class="w-full h-[470px] bg-black rounded-xl border border-slate-700 shadow-lg" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
                 </div>
 
             </div>
@@ -190,14 +246,14 @@
                     document.getElementById('loginView').classList.add('hidden');
                     document.getElementById('arcadeView').classList.remove('hidden');
 
-                    // Automatically load 2048 by default upon login
-                    loadGame('2048/index.html', '2048 Classic');
+                    // Automatically load Chess by default upon login
+                    loadGame('chess/index.html', 'Chess');
 
                     loadingState.classList.add('hidden');
                     loginForm.classList.remove('hidden');
                 }, 2000);
             } else {
-                errorMsg.classList.remove('hidden');
+                errorMsg.classList.add('hidden');
                 document.getElementById('password').classList.add('border-red-500');
             }
         }
