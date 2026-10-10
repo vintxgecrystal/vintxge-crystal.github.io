@@ -3,31 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Secure Portal</title>
-    <!-- Tailwind CSS for modern styling -->
+    <title>Enterprise Secure Portal // Gamer Mode Launcher</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        corporate: {
-                            50: '#f8fafc',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                        },
-                        gamer: {
-                            900: '#0f051d',
-                            800: '#1a0b2e',
-                            neon: '#00ffcc',
-                            purple: '#9d4edd'
-                        }
+                        corporate: { 50: '#f8fafc', 600: '#2563eb', 700: '#1d4ed8' },
+                        gamer: { 900: '#0f051d', 800: '#1a0b2e', neon: '#00ffcc', purple: '#9d4edd' }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts for Gamer/Corporate feel -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
     <style>
         .font-gaming { font-family: 'Rajdhani', sans-serif; }
@@ -37,9 +28,9 @@
         }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700" id="bodyRoot">
+<body class="bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700 p-4" id="bodyRoot">
 
-    <!-- CORPORATE LOGIN VIEW -->
+    <!-- ==================== CORPORATE LOGIN VIEW ==================== -->
     <div id="loginView" class="w-full max-w-md bg-white rounded-xl shadow-lg border border-slate-200 p-8 transition-all duration-500">
         <div class="text-center mb-8">
             <div class="inline-flex items-center justify-center w-12 h-12 bg-corporate-600 text-white rounded-lg font-bold text-xl mb-4 shadow-md">
@@ -67,74 +58,127 @@
 
             <div id="errorMsg" class="text-red-500 text-xs hidden font-medium">Invalid corporate credentials. Please try again.</div>
 
-            <button type="submit" class="w-full py-3 bg-corporate-600 hover:bg-corporate-700 text-white font-semibold rounded-lg shadow-md transition duration-200 text-sm">
+            <button type="submit" id="submitBtn" class="w-full py-3 bg-corporate-600 hover:bg-corporate-700 text-white font-semibold rounded-lg shadow-md transition duration-200 text-sm">
                 Sign In
             </button>
         </form>
+
+        <!-- Loading State (Hidden by default) -->
+        <div id="loadingState" class="hidden text-center py-6">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-corporate-600 border-t-transparent mb-2"></div>
+            <p class="text-xs font-semibold text-slate-600 uppercase tracking-wider animate-pulse">Verifying Enterprise SSO Credentials...</p>
+        </div>
 
         <div class="mt-8 pt-6 border-t border-slate-100 text-center">
             <p class="text-xs text-slate-400">Secure SSO Protected • v4.8.2-prod</p>
         </div>
     </div>
 
-    <!-- GAMER MODE DASHBOARD VIEW -->
-    <div id="gamerView" class="hidden w-full max-w-4xl bg-gamer-800 rounded-2xl shadow-2xl border-2 border-gamer-neon p-8 text-white transition-all duration-700 relative overflow-hidden">
+
+    <!-- ==================== GAMER MODE DASHBOARD VIEW ==================== -->
+    <div id="gamerView" class="hidden w-full max-w-5xl bg-gamer-800 rounded-2xl shadow-2xl border-2 border-gamer-neon p-6 md:p-8 text-white transition-all duration-700 relative overflow-hidden">
         <!-- Background decorative ambient glow -->
         <div class="absolute -top-24 -right-24 w-72 h-72 bg-gamer-neon/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div class="flex items-center justify-between border-b border-gamer-neon/30 pb-6 mb-8">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gamer-neon/30 pb-6 mb-6 gap-4">
             <div>
                 <span class="text-xs font-pixel text-gamer-neon uppercase tracking-widest block mb-1">SYSTEM OVERRIDE SUCCESSFUL</span>
-                <h2 class="text-4xl font-gaming font-extrabold text-white gamer-glow tracking-wide">GAMER_KILLERZ211 // HQ</h2>
+                <h2 class="text-3xl md:text-4xl font-gaming font-extrabold text-white gamer-glow tracking-wide">GAMER_KILLERZ211 // ARCADE HQ</h2>
             </div>
             <button onclick="logout()" class="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white font-gaming uppercase tracking-wider rounded border border-red-400 text-sm transition shadow-lg">
                 Lock Terminal
             </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-gamer-900/80 border border-gamer-neon/40 rounded-xl p-5 shadow-lg">
-                <span class="text-xs text-slate-400 font-gaming uppercase">Status</span>
-                <p class="text-2xl font-gaming font-bold text-gamer-neon mt-1">MAXIMUM OVERDRIVE</p>
-            </div>
-            <div class="bg-gamer-900/80 border border-purple-500/40 rounded-xl p-5 shadow-lg">
-                <span class="text-xs text-slate-400 font-gaming uppercase">Framerate Target</span>
-                <p class="text-2xl font-gaming font-bold text-purple-400 mt-1">360+ FPS (UNLOCKED)</p>
-            </div>
-            <div class="bg-gamer-900/80 border border-gamer-neon/40 rounded-xl p-5 shadow-lg">
-                <span class="text-xs text-slate-400 font-gaming uppercase">RGB Synchronization</span>
-                <p class="text-2xl font-gaming font-bold text-emerald-400 mt-1">CYCLING (SPECTRUM)</p>
-            </div>
-        </div>
+        <!-- Game Launcher Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Panel: Game Selection Menu -->
+            <div class="space-y-4">
+                <div class="bg-gamer-900/90 border border-gamer-neon/40 rounded-xl p-5 shadow-lg">
+                    <h3 class="text-md font-gaming font-bold text-gamer-neon mb-3 uppercase tracking-wider flex items-center gap-2">
+                        <span>🕹️</span> Select Game
+                    </h3>
+                    <div class="space-y-2">
+                        <button onclick="loadGame('neon-dodge')" class="w-full text-left px-4 py-3 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-sm font-gaming font-bold transition flex items-center justify-between group">
+                            <span>Neon Dodge (Mini Game)</span>
+                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
+                        </button>
+                        <button onclick="loadGame('cyber-snake')" class="w-full text-left px-4 py-3 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-sm font-gaming font-bold transition flex items-center justify-between group">
+                            <span>Cyber Snake (Mini Game)</span>
+                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
+                        </button>
+                    </div>
+                </div>
 
-        <div class="bg-gamer-900/90 rounded-xl p-6 border border-gamer-neon/20 mb-6">
-            <h3 class="text-lg font-gaming font-bold text-gamer-neon mb-3 flex items-center gap-2">
-                <span>⚡</span> MISSION OBJECTIVE ACTIVE
-            </h3>
-            <p class="text-sm text-slate-300 font-sans leading-relaxed">
-                Corporate defenses bypassed. RGB lighting fully initialized across all hardware peripherals. All productivity restrictions have been completely disabled. Ready to queue up.
-            </p>
-        </div>
+                <!-- Custom HTML File Loader -->
+                <div class="bg-gamer-900/90 border border-purple-500/40 rounded-xl p-5 shadow-lg">
+                    <h3 class="text-md font-gaming font-bold text-purple-400 mb-3 uppercase tracking-wider flex items-center gap-2">
+                        <span>🌐</span> Load External HTML Game
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-3">Input local file name (e.g. <code class="text-gamer-neon">RedBallRun.html</code>) or URL:</p>
+                    <div class="space-y-3">
+                        <input type="text" id="customGameUrl" placeholder="RedBallRun.html" 
+                            class="w-full px-3 py-2 rounded bg-gamer-800 border border-purple-500/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-400">
+                        <button onclick="loadCustomGame()" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-gaming font-bold uppercase tracking-wider rounded transition shadow">
+                            Launch HTML Game
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-        <div class="text-center">
-            <span class="text-xs font-pixel text-slate-500">PRESS 'LOCK TERMINAL' TO RETURN TO CORPORATE STEALTH MODE</span>
+            <!-- Right Panel: Game Display / Iframe Area -->
+            <div class="lg:col-span-2 bg-gamer-900/95 border-2 border-gamer-neon/50 rounded-xl p-4 flex flex-col items-center justify-center relative min-h-[420px] shadow-2xl">
+                <!-- Default Placeholder State -->
+                <div id="gamePlaceholder" class="text-center p-8">
+                    <div class="text-5xl mb-3">👾</div>
+                    <h4 class="text-lg font-gaming font-bold text-gamer-neon mb-1">NO GAME LOADED</h4>
+                    <p class="text-xs text-slate-400">Select a game from the left menu or load your custom HTML file to begin playing.</p>
+                </div>
+
+                <!-- Embedded / Rendered Game Container -->
+                <div id="gameContainer" class="hidden w-full h-full flex flex-col items-center justify-center relative">
+                    <div class="w-full flex justify-between items-center mb-2 px-2">
+                        <span id="currentGameTitle" class="text-xs font-gaming font-bold text-gamer-neon uppercase tracking-wider">Game Active</span>
+                        <button onclick="closeGame()" class="text-xs text-red-400 hover:text-red-300 font-gaming uppercase">Close Game ✕</button>
+                    </div>
+                    
+                    <!-- IFRAME for external html games like RedBallRun.html -->
+                    <iframe id="gameIframe" class="w-full h-[380px] bg-black rounded border border-gamer-neon/30 hidden" sandbox="allow-scripts allow-same-origin"></iframe>
+
+                    <!-- Canvas for built-in mini games -->
+                    <canvas id="gameCanvas" width="500" height="350" class="bg-black rounded border border-gamer-neon/40 shadow-inner hidden"></canvas>
+                    <div id="gameInstructions" class="text-xs text-slate-400 mt-2 text-center"></div>
+                </div>
+            </div>
         </div>
     </div>
 
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script>
         function handleLogin(event) {
             event.preventDefault();
             const pass = document.getElementById('password').value;
             const errorMsg = document.getElementById('errorMsg');
+            const loginForm = document.getElementById('loginForm');
+            const loadingState = document.getElementById('loadingState');
 
             if (pass === "GamerKillerz211") {
-                // Switch body style for gamer vibe
-                document.getElementById('bodyRoot').className = "bg-gamer-900 min-h-screen flex items-center justify-center transition-colors duration-700 p-4";
-                
-                // Hide login view, show gamer view with nice animation classes
-                document.getElementById('loginView').classList.add('hidden');
-                document.getElementById('gamerView').classList.remove('hidden');
+                errorMsg.classList.add('hidden');
+                loginForm.classList.add('hidden');
+                loadingState.classList.remove('hidden');
+
+                // Fake enterprise verification delay (2 seconds)
+                setTimeout(() => {
+                    document.getElementById('bodyRoot').className = "bg-gamer-900 min-h-screen flex items-center justify-center transition-colors duration-700 p-4";
+                    document.getElementById('loginView').classList.add('hidden');
+                    document.getElementById('gamerView').classList.remove('hidden');
+
+                    // Reset form state for next lock
+                    loadingState.classList.add('hidden');
+                    loginForm.classList.remove('hidden');
+                }, 2000);
             } else {
                 errorMsg.classList.remove('hidden');
                 document.getElementById('password').classList.add('border-red-500');
@@ -142,17 +186,202 @@
         }
 
         function logout() {
-            // Revert body background
-            document.getElementById('bodyRoot').className = "bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700";
-            
-            // Reset form fields
+            closeGame();
+            document.getElementById('bodyRoot').className = "bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700 p-4";
             document.getElementById('loginForm').reset();
             document.getElementById('errorMsg').classList.add('hidden');
             document.getElementById('password').classList.remove('border-red-500');
-
-            // Switch views back
             document.getElementById('gamerView').classList.add('hidden');
             document.getElementById('loginView').classList.remove('hidden');
+        }
+
+        // Game management variables
+        let activeInterval = null;
+
+        function loadGame(type) {
+            closeGame();
+            document.getElementById('gamePlaceholder').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            
+            const iframe = document.getElementById('gameIframe');
+            const canvas = document.getElementById('gameCanvas');
+            const titleEl = document.getElementById('currentGameTitle');
+            const instructionsEl = document.getElementById('gameInstructions');
+
+            if (type === 'neon-dodge') {
+                titleEl.innerText = "MINI GAME: Neon Dodge";
+                canvas.classList.remove('hidden');
+                instructionsEl.innerText = "Use LEFT / RIGHT arrow keys to avoid falling blocks!";
+                startNeonDodge(canvas);
+            } else if (type === 'cyber-snake') {
+                titleEl.innerText = "MINI GAME: Cyber Snake";
+                canvas.classList.remove('hidden');
+                instructionsEl.innerText = "Use ARROW KEYS to guide the cyber snake and eat nodes!";
+                startCyberSnake(canvas);
+            }
+        }
+
+        function loadCustomGame() {
+            const url = document.getElementById('customGameUrl').value.trim();
+            if (!url) {
+                alert("Please enter a valid HTML file path or URL (e.g. RedBallRun.html)");
+                return;
+            }
+
+            closeGame();
+            document.getElementById('gamePlaceholder').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+
+            const titleEl = document.getElementById('currentGameTitle');
+            const iframe = document.getElementById('gameIframe');
+            const instructionsEl = document.getElementById('gameInstructions');
+
+            titleEl.innerText = `LOADED FILE: ${url}`;
+            iframe.src = url;
+            iframe.classList.remove('hidden');
+            instructionsEl.innerText = "Running external HTML game source in sandbox mode.";
+        }
+
+        function closeGame() {
+            if (activeInterval) {
+                clearInterval(activeInterval);
+                activeInterval = null;
+            }
+            document.getElementById('gameIframe').src = "";
+            document.getElementById('gameIframe').classList.add('hidden');
+            document.getElementById('gameCanvas').classList.add('hidden');
+            document.getElementById('gameContainer').classList.add('hidden');
+            document.getElementById('gamePlaceholder').classList.remove('hidden');
+        }
+
+        // --- Built-in Mini Game 1: Neon Dodge ---
+        function startNeonDodge(canvas) {
+            const ctx = canvas.getContext('2d');
+            let player = { x: 225, y: 310, size: 25, speed: 7 };
+            let obstacles = [];
+            let score = 0;
+            let keys = {};
+
+            window.onkeydown = e => keys[e.key] = true;
+            window.onkeyup = e => keys[e.key] = false;
+
+            activeInterval = setInterval(() => {
+                ctx.fillStyle = '#0f051d';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Player movement
+                if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
+                if (keys['ArrowRight'] && player.x < canvas.width - player.size) player.x += player.speed;
+
+                // Draw Player
+                ctx.fillStyle = '#00ffcc';
+                ctx.fillRect(player.x, player.y, player.size, player.size);
+
+                // Spawn obstacles
+                if (Math.random() < 0.05) {
+                    obstacles.push({ x: Math.random() * (canvas.width - 25), y: -25, size: 25, speed: 4 + Math.random() * 3 });
+                }
+
+                // Update & draw obstacles
+                for (let i = obstacles.length - 1; i >= 0; i--) {
+                    let obs = obstacles[i];
+                    obs.y += obs.speed;
+                    ctx.fillStyle = '#9d4edd';
+                    ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
+
+                    // Collision check
+                    if (
+                        player.x < obs.x + obs.size &&
+                        player.x + player.size > obs.x &&
+                        player.y < obs.y + obs.size &&
+                        player.y + player.size > obs.y
+                    ) {
+                        clearInterval(activeInterval);
+                        ctx.fillStyle = '#ff0055';
+                        ctx.font = '20px Rajdhani';
+                        ctx.fillText("GAME OVER - PRESS RESTART", 120, 180);
+                        return;
+                    }
+
+                    if (obs.y > canvas.height) {
+                        obstacles.splice(i, 1);
+                        score += 10;
+                    }
+                }
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '14px Rajdhani';
+                ctx.fillText(`Score: ${score}`, 15, 25);
+            }, 1000 / 60);
+        }
+
+        // --- Built-in Mini Game 2: Cyber Snake ---
+        function startCyberSnake(canvas) {
+            const ctx = canvas.getContext('2d');
+            let box = 20;
+            let snake = [{ x: 10 * box, y: 10 * box }];
+            let food = { x: Math.floor(Math.random() * 23) * box, y: Math.floor(Math.random() * 16) * box };
+            let d = "RIGHT";
+            let score = 0;
+
+            document.addEventListener('keydown', direction);
+            function direction(event) {
+                if (event.keyCode == 37 && d != "RIGHT") d = "LEFT";
+                else if (event.keyCode == 38 && d != "DOWN") d = "UP";
+                else if (event.keyCode == 39 && d != "LEFT") d = "RIGHT";
+                else if (event.keyCode == 40 && d != "UP") d = "DOWN";
+            }
+
+            activeInterval = setInterval(() => {
+                ctx.fillStyle = '#0f051d';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = 0; i < snake.length; i++) {
+                    ctx.fillStyle = (i == 0) ? '#00ffcc' : '#9d4edd';
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                }
+
+                ctx.fillStyle = '#ff0055';
+                ctx.fillRect(food.x, food.y, box, box);
+
+                let snakeX = snake[0].x;
+                let snakeY = snake[0].y;
+
+                if (d == "LEFT") snakeX -= box;
+                if (d == "UP") snakeY -= box;
+                if (d == "RIGHT") snakeX += box;
+                if (d == "DOWN") snakeY += box;
+
+                if (snakeX == food.x && snakeY == food.y) {
+                    score += 10;
+                    food = { x: Math.floor(Math.random() * 23) * box, y: Math.floor(Math.random() * 16) * box };
+                } else {
+                    snake.pop();
+                }
+
+                let newHead = { x: snakeX, y: snakeY };
+
+                if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
+                    clearInterval(activeInterval);
+                    ctx.fillStyle = '#ff0055';
+                    ctx.font = '20px Rajdhani';
+                    ctx.fillText("CRASHED! REBOOT TERMINAL", 130, 180);
+                    return;
+                }
+
+                snake.unshift(newHead);
+
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '14px Rajdhani';
+                ctx.fillText(`Cyber Score: ${score}`, 15, 25);
+            }, 100);
+
+            function collision(head, array) {
+                for (let i = 0; i < array.length; i++) {
+                    if (head.x == array[i].x && head.y == array[i].y) return true;
+                }
+                return false;
+            }
         }
     </script>
 </body>
