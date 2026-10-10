@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Secure Portal // 4-Game Arcade Hub</title>
+    <title>Enterprise Secure Portal // Student Arcade Hub</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -12,23 +12,21 @@
                 extend: {
                     colors: {
                         corporate: { 50: '#f8fafc', 600: '#2563eb', 700: '#1d4ed8' },
-                        gamer: { 900: '#0f051d', 800: '#1a0b2e', neon: '#00ffcc', purple: '#9d4edd' }
+                        arcade: {
+                            dark: '#1e293b',
+                            card: '#334155',
+                            accent: '#3b82f6',
+                            bg: '#0f172a'
+                        }
                     }
                 }
             }
         }
     </script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        .font-gaming { font-family: 'Rajdhani', sans-serif; }
-        .font-pixel { font-family: 'Press Start 2P', cursive; }
-        .gamer-glow {
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7), 0 0 20px rgba(157, 78, 221, 0.5);
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700 p-4" id="bodyRoot">
+<body class="bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-500 p-4 font-sans" id="bodyRoot">
 
     <!-- ==================== CORPORATE LOGIN VIEW ==================== -->
     <div id="loginView" class="w-full max-w-md bg-white rounded-xl shadow-lg border border-slate-200 p-8 transition-all duration-500">
@@ -75,98 +73,104 @@
     </div>
 
 
-    <!-- ==================== GAMER MODE DASHBOARD VIEW ==================== -->
-    <div id="gamerView" class="hidden w-full max-w-6xl bg-gamer-800 rounded-2xl shadow-2xl border-2 border-gamer-neon p-6 md:p-8 text-white transition-all duration-700 relative overflow-hidden">
-        <!-- Background ambient glow -->
-        <div class="absolute -top-24 -right-24 w-72 h-72 bg-gamer-neon/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-gamer-neon/30 pb-6 mb-6 gap-4">
-            <div>
-                <span class="text-xs font-pixel text-gamer-neon uppercase tracking-widest block mb-1">SYSTEM OVERRIDE SUCCESSFUL</span>
-                <h2 class="text-3xl md:text-4xl font-gaming font-extrabold text-white gamer-glow tracking-wide">GAMER_KILLERZ211 // ARCADE HUB</h2>
+    <!-- ==================== UNBLOCKED GAMES DASHBOARD VIEW ==================== -->
+    <div id="arcadeView" class="hidden w-full max-w-6xl bg-arcade-bg rounded-2xl shadow-2xl border border-slate-700 p-6 md:p-8 text-white transition-all duration-500">
+        
+        <!-- Header Navigation Bar -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-700 pb-4 mb-6 gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow">🎮</div>
+                <div>
+                    <h2 class="text-xl font-bold tracking-tight text-white">Classroom Arcade Hub</h2>
+                    <p class="text-xs text-slate-400">Unblocked Games Collection • Ready to Play</p>
+                </div>
             </div>
-            <button onclick="logout()" class="px-4 py-2 bg-red-600/80 hover:bg-red-600 text-white font-gaming uppercase tracking-wider rounded border border-red-400 text-sm transition shadow-lg">
-                Lock Terminal
-            </button>
+            
+            <div class="flex items-center gap-3 w-full md:w-auto justify-between">
+                <input type="text" id="gameSearch" onkeyup="filterGames()" placeholder="Search games..." 
+                    class="px-3 py-1.5 rounded-lg bg-arcade-card border border-slate-600 text-xs text-white focus:outline-none focus:ring-2 focus:ring-blue-500 w-48">
+                <button onclick="logout()" class="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium rounded text-xs transition border border-slate-600">
+                    Lock Terminal
+                </button>
+            </div>
         </div>
 
-        <!-- Layout Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left Panel: 4 Built-In Games & Custom Loader -->
-            <div class="space-y-4">
-                <div class="bg-gamer-900/90 border border-gamer-neon/40 rounded-xl p-5 shadow-lg">
-                    <h3 class="text-md font-gaming font-bold text-gamer-neon mb-3 uppercase tracking-wider flex items-center gap-2">
-                        <span>🕹️</span> Arcade Selection (4 Games)
-                    </h3>
-                    <div class="space-y-2">
-                        <button onclick="loadGame('neon-dodge')" class="w-full text-left px-4 py-2.5 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-xs font-gaming font-bold transition flex items-center justify-between group">
-                            <span>1. Neon Dodge (Action)</span>
-                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
-                        </button>
-                        <button onclick="loadGame('cyber-snake')" class="w-full text-left px-4 py-2.5 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-xs font-gaming font-bold transition flex items-center justify-between group">
-                            <span>2. Cyber Snake (Classic)</span>
-                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
-                        </button>
-                        <button onclick="loadGame('retro-pong')" class="w-full text-left px-4 py-2.5 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-xs font-gaming font-bold transition flex items-center justify-between group">
-                            <span>3. Retro Pong (Arcade)</span>
-                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
-                        </button>
-                        <button onclick="loadGame('arcade-clicker')" class="w-full text-left px-4 py-2.5 rounded-lg bg-gamer-800 hover:bg-gamer-neon/20 border border-gamer-neon/30 text-xs font-gaming font-bold transition flex items-center justify-between group">
-                            <span>4. RGB Clicker (Idle)</span>
-                            <span class="text-gamer-neon group-hover:translate-x-1 transition">▶</span>
-                        </button>
-                    </div>
-                </div>
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            <!-- Left Side: Game Grid / Picker (1 column on large screens) -->
+            <div class="lg:col-span-1 space-y-3">
+                <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1">Featured Games</h3>
+                
+                <div id="gameListContainer" class="space-y-2 max-h-[480px] overflow-y-auto pr-1">
+                    <!-- Game Card 1 -->
+                    <button onclick="loadGame('2048/index.html', '2048 Classic')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🔢</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">2048</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Puzzle Game</p>
+                        </div>
+                    </button>
 
-                <!-- Custom HTML File Loader -->
-                <div class="bg-gamer-900/90 border border-purple-500/40 rounded-xl p-5 shadow-lg">
-                    <h3 class="text-md font-gaming font-bold text-purple-400 mb-2 uppercase tracking-wider flex items-center gap-2">
-                        <span>🌐</span> External HTML Game
-                    </h3>
-                    <div class="space-y-2">
-                        <input type="text" id="customGameUrl" placeholder="RedBallRun.html" 
-                            class="w-full px-3 py-2 rounded bg-gamer-800 border border-purple-500/50 text-white text-xs focus:outline-none focus:ring-2 focus:ring-purple-400">
-                        <button onclick="loadCustomGame()" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-gaming font-bold uppercase tracking-wider rounded transition shadow">
-                            Launch File
-                        </button>
-                    </div>
+                    <!-- Game Card 2 -->
+                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=retro-bowl', 'Retro Bowl')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🏈</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Retro Bowl</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Sports Arcade</p>
+                        </div>
+                    </button>
+
+                    <!-- Game Card 3 -->
+                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=slope', 'Slope Game')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">📐</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Slope</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Action / Runner</p>
+                        </div>
+                    </button>
+
+                    <!-- Game Card 4 -->
+                    <button onclick="loadGame('https://html5.gamedistribution.com/rvfs/embed/index.html?game=moto-x3m', 'Moto X3M')" class="game-card w-full text-left p-3 rounded-xl bg-arcade-card hover:bg-slate-700 border border-slate-600 transition flex items-center gap-3 group">
+                        <div class="w-10 h-10 bg-rose-600 rounded-lg flex items-center justify-center font-bold text-lg shrink-0">🏍️</div>
+                        <div class="overflow-hidden">
+                            <h4 class="text-sm font-bold text-white group-hover:text-blue-400 transition truncate">Moto X3M</h4>
+                            <p class="text-[11px] text-slate-400 truncate">Stunt Racing</p>
+                        </div>
+                    </button>
                 </div>
             </div>
 
-            <!-- Right Panel: Game Render Display -->
-            <div class="lg:col-span-2 bg-gamer-900/95 border-2 border-gamer-neon/50 rounded-xl p-4 flex flex-col items-center justify-center relative min-h-[440px] shadow-2xl">
-                <!-- Placeholder -->
+            <!-- Right Side: Game Player Display Window (3 columns) -->
+            <div class="lg:col-span-3 bg-arcade-dark border border-slate-700 rounded-2xl p-4 flex flex-col items-center justify-center relative min-h-[500px] shadow-inner">
+                
+                <!-- Initial Empty State -->
                 <div id="gamePlaceholder" class="text-center p-8">
-                    <div class="text-5xl mb-3">👾</div>
-                    <h4 class="text-lg font-gaming font-bold text-gamer-neon mb-1">SELECT A GAME TO START</h4>
-                    <p class="text-xs text-slate-400">Choose from one of the 4 built-in arcade games or load a local file on the left.</p>
+                    <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-3 border border-slate-700">🚀</div>
+                    <h3 class="text-base font-bold text-white mb-1">Select a Game to Start Playing</h3>
+                    <p class="text-xs text-slate-400 max-w-sm">Choose any unblocked game from the sidebar list on the left to launch it instantly.</p>
                 </div>
 
                 <!-- Active Game Container -->
                 <div id="gameContainer" class="hidden w-full h-full flex flex-col items-center justify-center relative">
-                    <div class="w-full flex justify-between items-center mb-2 px-2">
-                        <span id="currentGameTitle" class="text-xs font-gaming font-bold text-gamer-neon uppercase tracking-wider">Game Active</span>
-                        <button onclick="closeGame()" class="text-xs text-red-400 hover:text-red-300 font-gaming uppercase">Close Game ✕</button>
+                    <div class="w-full flex justify-between items-center mb-3 px-1">
+                        <span id="currentGameTitle" class="text-xs font-semibold text-blue-400 uppercase tracking-wider">Active Game</span>
+                        <div class="flex items-center gap-3">
+                            <button onclick="toggleFullscreen()" class="text-xs text-slate-300 hover:text-white bg-slate-800 px-2.5 py-1 rounded border border-slate-600 transition">⛶ Fullscreen</button>
+                            <button onclick="closeGame()" class="text-xs text-red-400 hover:text-red-300 bg-slate-800 px-2.5 py-1 rounded border border-slate-600 transition">Close ✕</button>
+                        </div>
                     </div>
                     
-                    <!-- Iframe for local files -->
-                    <iframe id="gameIframe" class="w-full h-[380px] bg-black rounded border border-gamer-neon/30 hidden" sandbox="allow-scripts allow-same-origin"></iframe>
-
-                    <!-- Canvas for Mini Games 1, 2, 3 -->
-                    <canvas id="gameCanvas" width="520" height="360" class="bg-black rounded border border-gamer-neon/40 shadow-inner hidden"></canvas>
-
-                    <!-- DOM container for Mini Game 4 (Clicker) -->
-                    <div id="clickerContainer" class="w-full h-[360px] bg-black rounded border border-gamer-neon/40 flex flex-col items-center justify-center p-6 hidden"></div>
-
-                    <div id="gameInstructions" class="text-xs text-slate-400 mt-2 text-center"></div>
+                    <!-- Game Iframe Player -->
+                    <iframe id="gameIframe" class="w-full h-[460px] bg-black rounded-xl border border-slate-700 shadow-lg" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
                 </div>
+
             </div>
+
         </div>
     </div>
 
-    <!-- ==================== GAME LOGIC & SCRIPTS ==================== -->
+    <!-- ==================== SCRIPT LOGIC ==================== -->
     <script>
         function handleLogin(event) {
             event.preventDefault();
@@ -180,11 +184,14 @@
                 loginForm.classList.add('hidden');
                 loadingState.classList.remove('hidden');
 
-                // 2-second fake enterprise verification delay
+                // 2-second fake enterprise security verification delay
                 setTimeout(() => {
-                    document.getElementById('bodyRoot').className = "bg-gamer-900 min-h-screen flex items-center justify-center transition-colors duration-700 p-4";
+                    document.getElementById('bodyRoot').className = "bg-slate-900 min-h-screen flex items-center justify-center transition-colors duration-500 p-4";
                     document.getElementById('loginView').classList.add('hidden');
-                    document.getElementById('gamerView').classList.remove('hidden');
+                    document.getElementById('arcadeView').classList.remove('hidden');
+
+                    // Automatically load 2048 by default upon login
+                    loadGame('2048/index.html', '2048 Classic');
 
                     loadingState.classList.add('hidden');
                     loginForm.classList.remove('hidden');
@@ -197,322 +204,49 @@
 
         function logout() {
             closeGame();
-            document.getElementById('bodyRoot').className = "bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-700 p-4";
+            document.getElementById('bodyRoot').className = "bg-slate-100 min-h-screen flex items-center justify-center transition-colors duration-500 p-4";
             document.getElementById('loginForm').reset();
             document.getElementById('errorMsg').classList.add('hidden');
             document.getElementById('password').classList.remove('border-red-500');
-            document.getElementById('gamerView').classList.add('hidden');
+            document.getElementById('arcadeView').classList.add('hidden');
             document.getElementById('loginView').classList.remove('hidden');
         }
 
-        let activeInterval = null;
+        function loadGame(url, title) {
+            document.getElementById('gamePlaceholder').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+
+            document.getElementById('currentGameTitle').innerText = `Playing: ${title}`;
+            document.getElementById('gameIframe').src = url;
+        }
 
         function closeGame() {
-            if (activeInterval) {
-                clearInterval(activeInterval);
-                activeInterval = null;
-            }
-            window.onkeydown = null;
-            window.onkeyup = null;
             document.getElementById('gameIframe').src = "";
-            document.getElementById('gameIframe').classList.add('hidden');
-            document.getElementById('gameCanvas').classList.add('hidden');
-            document.getElementById('clickerContainer').classList.add('hidden');
             document.getElementById('gameContainer').classList.add('hidden');
             document.getElementById('gamePlaceholder').classList.remove('hidden');
         }
 
-        function loadGame(type) {
-            closeGame();
-            document.getElementById('gamePlaceholder').classList.add('hidden');
-            document.getElementById('gameContainer').classList.remove('hidden');
-            
-            const titleEl = document.getElementById('currentGameTitle');
-            const canvas = document.getElementById('gameCanvas');
-            const clicker = document.getElementById('clickerContainer');
-            const instructionsEl = document.getElementById('gameInstructions');
-
-            if (type === 'neon-dodge') {
-                titleEl.innerText = "GAME 1: Neon Dodge";
-                canvas.classList.remove('hidden');
-                instructionsEl.innerText = "Use LEFT / RIGHT arrow keys to dodge falling obstacles!";
-                startNeonDodge(canvas);
-            } else if (type === 'cyber-snake') {
-                titleEl.innerText = "GAME 2: Cyber Snake";
-                canvas.classList.remove('hidden');
-                instructionsEl.innerText = "Use ARROW KEYS to steer snake and collect nodes!";
-                startCyberSnake(canvas);
-            } else if (type === 'retro-pong') {
-                titleEl.innerText = "GAME 3: Retro Pong";
-                canvas.classList.remove('hidden');
-                instructionsEl.innerText = "Use UP / DOWN arrow keys to move your paddle.";
-                startRetroPong(canvas);
-            } else if (type === 'arcade-clicker') {
-                titleEl.innerText = "GAME 4: RGB Clicker";
-                clicker.classList.remove('hidden');
-                instructionsEl.innerText = "Click the glowing RGB core to generate power and buy upgrades!";
-                startRGBClicker(clicker);
-            }
-        }
-
-        function loadCustomGame() {
-            const url = document.getElementById('customGameUrl').value.trim();
-            if (!url) {
-                alert("Please enter a valid HTML filename (e.g. RedBallRun.html)");
-                return;
-            }
-
-            closeGame();
-            document.getElementById('gamePlaceholder').classList.add('hidden');
-            document.getElementById('gameContainer').classList.remove('hidden');
-
-            const titleEl = document.getElementById('currentGameTitle');
+        function toggleFullscreen() {
             const iframe = document.getElementById('gameIframe');
-            const instructionsEl = document.getElementById('gameInstructions');
-
-            titleEl.innerText = `EXTERNAL FILE: ${url}`;
-            iframe.src = url;
-            iframe.classList.remove('hidden');
-            instructionsEl.innerText = "Running custom HTML file inside sandbox environment.";
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            }
         }
 
-        // --- GAME 1: Neon Dodge ---
-        function startNeonDodge(canvas) {
-            const ctx = canvas.getContext('2d');
-            let player = { x: 235, y: 315, size: 25, speed: 7 };
-            let obstacles = [];
-            let score = 0;
-            let keys = {};
+        function filterGames() {
+            const query = document.getElementById('gameSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.game-card');
 
-            window.onkeydown = e => keys[e.key] = true;
-            window.onkeyup = e => keys[e.key] = false;
-
-            activeInterval = setInterval(() => {
-                ctx.fillStyle = '#0f051d';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                if (keys['ArrowLeft'] && player.x > 0) player.x -= player.speed;
-                if (keys['ArrowRight'] && player.x < canvas.width - player.size) player.x += player.speed;
-
-                ctx.fillStyle = '#00ffcc';
-                ctx.fillRect(player.x, player.y, player.size, player.size);
-
-                if (Math.random() < 0.05) {
-                    obstacles.push({ x: Math.random() * (canvas.width - 25), y: -25, size: 25, speed: 4 + Math.random() * 3 });
-                }
-
-                for (let i = obstacles.length - 1; i >= 0; i--) {
-                    let obs = obstacles[i];
-                    obs.y += obs.speed;
-                    ctx.fillStyle = '#9d4edd';
-                    ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
-
-                    if (player.x < obs.x + obs.size && player.x + player.size > obs.x && player.y < obs.y + obs.size && player.y + player.size > obs.y) {
-                        clearInterval(activeInterval);
-                        ctx.fillStyle = '#ff0055';
-                        ctx.font = '22px Rajdhani';
-                        ctx.fillText("CRASHED! RESTART FROM MENU", 120, 185);
-                        return;
-                    }
-                    if (obs.y > canvas.height) { obstacles.splice(i, 1); score += 10; }
-                }
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '14px Rajdhani';
-                ctx.fillText(`Score: ${score}`, 15, 25);
-            }, 1000 / 60);
-        }
-
-        // --- GAME 2: Cyber Snake ---
-        function startCyberSnake(canvas) {
-            const ctx = canvas.getContext('2d');
-            let box = 20;
-            let snake = [{ x: 10 * box, y: 10 * box }];
-            let food = { x: Math.floor(Math.random() * 25) * box, y: Math.floor(Math.random() * 17) * box };
-            let d = "RIGHT";
-            let score = 0;
-
-            window.onkeydown = event => {
-                if (event.key == 'ArrowLeft' && d != "RIGHT") d = "LEFT";
-                else if (event.key == 'ArrowUp' && d != "DOWN") d = "UP";
-                else if (event.key == 'ArrowRight' && d != "LEFT") d = "RIGHT";
-                else if (event.key == 'ArrowDown' && d != "UP") d = "DOWN";
-            };
-
-            activeInterval = setInterval(() => {
-                ctx.fillStyle = '#0f051d';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = 0; i < snake.length; i++) {
-                    ctx.fillStyle = (i == 0) ? '#00ffcc' : '#9d4edd';
-                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                }
-
-                ctx.fillStyle = '#ff0055';
-                ctx.fillRect(food.x, food.y, box, box);
-
-                let snakeX = snake[0].x;
-                let snakeY = snake[0].y;
-
-                if (d == "LEFT") snakeX -= box;
-                if (d == "UP") snakeY -= box;
-                if (d == "RIGHT") snakeX += box;
-                if (d == "DOWN") snakeY += box;
-
-                if (snakeX == food.x && snakeY == food.y) {
-                    score += 10;
-                    food = { x: Math.floor(Math.random() * 25) * box, y: Math.floor(Math.random() * 17) * box };
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'flex';
                 } else {
-                    snake.pop();
+                    card.style.display = 'none';
                 }
-
-                let newHead = { x: snakeX, y: snakeY };
-
-                if (snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
-                    clearInterval(activeInterval);
-                    ctx.fillStyle = '#ff0055';
-                    ctx.font = '22px Rajdhani';
-                    ctx.fillText("GAME OVER - REBOOT TERMINAL", 125, 185);
-                    return;
-                }
-
-                snake.unshift(newHead);
-
-                ctx.fillStyle = '#ffffff';
-                ctx.font = '14px Rajdhani';
-                ctx.fillText(`Cyber Score: ${score}`, 15, 25);
-            }, 100);
-
-            function collision(head, array) {
-                for (let i = 0; i < array.length; i++) {
-                    if (head.x == array[i].x && head.y == array[i].y) return true;
-                }
-                return false;
-            }
-        }
-
-        // --- GAME 3: Retro Pong ---
-        function startRetroPong(canvas) {
-            const ctx = canvas.getContext('2d');
-            let p1Y = 130, p2Y = 130, pHeight = 70, pWidth = 12;
-            let ballX = 260, ballY = 180, ballXSpeed = 4, ballYSpeed = 3, ballSize = 10;
-            let p1Score = 0, p2Score = 0;
-            let keys = {};
-
-            window.onkeydown = e => keys[e.key] = true;
-            window.onkeyup = e => keys[e.key] = false;
-
-            activeInterval = setInterval(() => {
-                ctx.fillStyle = '#0f051d';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                // Player paddle control
-                if (keys['ArrowUp'] && p1Y > 0) p1Y -= 6;
-                if (keys['ArrowDown'] && p1Y < canvas.height - pHeight) p1Y += 6;
-
-                // AI opponent paddle movement
-                if (p2Y + pHeight / 2 < ballY) p2Y += 4;
-                else if (p2Y + pHeight / 2 > ballY) p2Y -= 4;
-
-                // Ball movement
-                ballX += ballXSpeed;
-                ballY += ballYSpeed;
-
-                // Wall collision top/bottom
-                if (ballY <= 0 || ballY >= canvas.height - ballSize) ballYSpeed *= -1;
-
-                // Paddle collision 1
-                if (ballX <= 20 + pWidth && ballY >= p1Y && ballY <= p1Y + pHeight) {
-                    ballXSpeed *= -1;
-                    ballX = 20 + pWidth;
-                }
-                // Paddle collision 2
-                if (ballX >= canvas.width - 20 - pWidth - ballSize && ballY >= p2Y && ballY <= p2Y + pHeight) {
-                    ballXSpeed *= -1;
-                    ballX = canvas.width - 20 - pWidth - ballSize;
-                }
-
-                // Scoring
-                if (ballX < 0) { p2Score++; resetBall(); }
-                if (ballX > canvas.width) { p1Score++; resetBall(); }
-
-                // Draw paddles & ball
-                ctx.fillStyle = '#00ffcc';
-                ctx.fillRect(20, p1Y, pWidth, pHeight);
-                ctx.fillStyle = '#ff0055';
-                ctx.fillRect(canvas.width - 20 - pWidth, p2Y, pWidth, pHeight);
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(ballX, ballY, ballSize, ballSize);
-
-                // Net dashed line
-                ctx.strokeStyle = '#9d4edd';
-                ctx.setLineDash([5, 15]);
-                ctx.beginPath();
-                ctx.moveTo(canvas.width / 2, 0);
-                ctx.lineTo(canvas.width / 2, canvas.height);
-                ctx.stroke();
-                ctx.setLineDash([]);
-
-                ctx.font = '16px Rajdhani';
-                ctx.fillText(`Player: ${p1Score}   AI: ${p2Score}`, canvas.width / 2 - 60, 25);
-            }, 1000 / 60);
-
-            function resetBall() {
-                ballX = canvas.width / 2;
-                ballY = canvas.height / 2;
-                ballXSpeed *= -1;
-            }
-        }
-
-        // --- GAME 4: RGB Clicker ---
-        function startRGBClicker(container) {
-            let rgbPower = 0;
-            let perClick = 1;
-            let autoRate = 0;
-
-            container.innerHTML = `
-                <div class="text-center space-y-4">
-                    <span class="text-xs font-pixel text-gamer-neon">RGB ENERGY CORE</span>
-                    <div class="text-4xl font-gaming font-bold text-white gamer-glow" id="powerDisplay">0 Watts</div>
-                    <button id="coreBtn" class="w-32 h-32 rounded-full bg-gradient-to-tr from-gamer-neon to-purple-600 hover:scale-105 active:scale-95 transition shadow-2xl flex items-center justify-center mx-auto text-2xl font-gaming font-bold text-slate-900 border-4 border-white">
-                        HARVEST
-                    </button>
-                    <div class="flex gap-4 justify-center pt-2">
-                        <button id="upgrade1" class="px-3 py-1.5 bg-gamer-800 hover:bg-gamer-neon/30 border border-gamer-neon rounded text-xs font-gaming font-bold text-gamer-neon transition">
-                            Boost Core (+1/click) [Cost: 15W]
-                        </button>
-                        <button id="upgrade2" class="px-3 py-1.5 bg-gamer-800 hover:bg-purple-500/30 border border-purple-400 rounded text-xs font-gaming font-bold text-purple-300 transition">
-                            Auto Fan (+1W/s) [Cost: 50W]
-                        </button>
-                    </div>
-                </div>
-            `;
-
-            const powerDisplay = document.getElementById('powerDisplay');
-            const coreBtn = document.getElementById('coreBtn');
-            const up1 = document.getElementById('upgrade1');
-            const up2 = document.getElementById('upgrade2');
-
-            coreBtn.onclick = () => { rgbPower += perClick; updateUI(); };
-            
-            up1.onclick = () => {
-                if (rgbPower >= 15) { rgbPower -= 15; perClick++; updateUI(); }
-            };
-
-            up2.onclick = () => {
-                if (rgbPower >= 50) { rgbPower -= 50; autoRate++; updateUI(); }
-            };
-
-            function updateUI() {
-                powerDisplay.innerText = `${rgbPower} Watts`;
-            }
-
-            activeInterval = setInterval(() => {
-                if (autoRate > 0) {
-                    rgbPower += autoRate;
-                    updateUI();
-                }
-            }, 1000);
+            });
         }
     </script>
 </body>
