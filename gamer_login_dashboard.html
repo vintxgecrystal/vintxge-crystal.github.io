@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Login Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gamer: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            accent: '#10b981',
+                            hover: '#059669',
+                            error: '#ef4444'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="h-full bg-gamer-dark text-slate-100 flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md">
+
+        <!-- Login Card Section -->
+        <div id="login-card" class="bg-gamer-card border border-slate-700 rounded-2xl shadow-2xl p-8 transition-all duration-300">
+            
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full mb-4 text-2xl font-bold border border-emerald-500/20">
+                    🎮
+                </div>
+                <h1 class="text-2xl font-bold tracking-tight">Gamer Access Portal</h1>
+                <p class="text-sm text-slate-400 mt-1">Enter your password to unlock the dashboard</p>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-6">
+                <div>
+                    <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Access Password</label>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            required 
+                            placeholder="Enter password..."
+                            class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-100 placeholder-slate-500 text-sm transition-all"
+                        >
+                    </div>
+                </div>
+
+                <!-- Error Message Container (Hidden by default) -->
+                <div id="error-msg" class="hidden p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-xs font-medium text-center">
+                    Incorrect password. Hint: Try 'GamerKillerz211'
+                </div>
+
+                <button 
+                    type="submit" 
+                    class="w-full py-3 px-4 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-semibold rounded-xl shadow-lg shadow-emerald-500/20 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-gamer-card text-sm cursor-pointer"
+                >
+                    Login to Dashboard
+                </button>
+            </form>
+            
+            <div class="mt-6 text-center text-xs text-slate-500">
+                Authorized access only. Protected by GamerKillerz protocols.
+            </div>
+        </div>
+
+        <!-- Dashboard View Section (Hidden by default) -->
+        <div id="dashboard-view" class="hidden bg-gamer-card border border-slate-700 rounded-2xl shadow-2xl p-8 transition-all duration-300">
+            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                        GK
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-lg">Welcome, Gamer!</h2>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400">
+                            Online & Verified
+                        </span>
+                    </div>
+                </div>
+                <button 
+                    onclick="handleLogout()"
+                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-lg border border-slate-700 transition-all cursor-pointer"
+                >
+                    Logout
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800">
+                    <h3 class="text-xs uppercase font-semibold tracking-wider text-slate-400 mb-1">System Status</h3>
+                    <p class="text-sm font-medium text-emerald-400">Access granted successfully via GamerKillerz211 key.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800 text-center">
+                        <span class="block text-2xl font-bold text-slate-100">99.9%</span>
+                        <span class="text-xs text-slate-400">Server Uptime</span>
+                    </div>
+                    <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800 text-center">
+                        <span class="block text-2xl font-bold text-emerald-400">Active</span>
+                        <span class="text-xs text-slate-400">Connection</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-xs text-slate-500">You are logged into the restricted dashboard screen.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Correct password requirement
+        const CORRECT_PASSWORD = 'GamerKillerz211';
+
+        function handleLogin(event) {
+            // Prevent standard form submission reload
+            event.preventDefault();
+
+            const passwordInput = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+            const loginCard = document.getElementById('login-card');
+            const dashboardView = document.getElementById('dashboard-view');
+
+            if (passwordInput === CORRECT_PASSWORD) {
+                // Hide error message if previously shown
+                errorMsg.classList.add('hidden');
+                
+                // Transition views smoothly
+                loginCard.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    loginCard.classList.add('hidden');
+                    dashboardView.classList.remove('hidden');
+                    dashboardView.classList.add('opacity-100', 'scale-100');
+                }, 200);
+
+            } else {
+                // Show error message and shake or highlight input
+                errorMsg.classList.remove('hidden');
+                const pwdField = document.getElementById('password');
+                pwdField.classList.add('border-red-500', 'ring-2', 'ring-red-500/20');
+                
+                setTimeout(() => {
+                    pwdField.classList.remove('border-red-500', 'ring-2', 'ring-red-500/20');
+                }, 1500);
+            }
+        }
+
+        function handleLogout() {
+            const loginCard = document.getElementById('login-card');
+            const dashboardView = document.getElementById('dashboard-view');
+            const passwordField = document.getElementById('password');
+
+            // Clear input
+            passwordField.value = '';
+
+            // Transition back to login view
+            dashboardView.classList.add('hidden');
+            loginCard.classList.remove('hidden');
+            setTimeout(() => {
+                loginCard.classList.remove('opacity-0', 'scale-95');
+            }, 50);
+        }
+    </script>
+
+</body>
+</html>
